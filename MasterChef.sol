@@ -4,6 +4,7 @@ import './lib/SafeMath.sol';
 import './lib/IBEP20.sol';
 import './lib/SafeBEP20.sol';
 import './lib/Ownable.sol';
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 import "./SlionToken.sol";
 
