@@ -120,7 +120,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
             allocPoint: 1000,
             lastRewardBlock: startBlock,
             accSlionPerShare: 0,
-            depositFeeBP: _depositFeeBP
+            depositFeeBP: 0
         }));
 
         totalAllocPoint = 1000;
