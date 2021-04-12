@@ -4,7 +4,7 @@ import './lib/SafeMath.sol';
 import './lib/IBEP20.sol';
 import './lib/SafeBEP20.sol';
 import './lib/Ownable.sol';
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "./lib/ReentrancyGuard.sol";
 
 import "./SlionToken.sol";
 
@@ -17,7 +17,7 @@ import "./SlionToken.sol";
 // distributed and the community can show to govern itself.
 //
 // Have fun reading it. Hopefully it's bug-free. God bless.
-contract MasterChef is Ownable {
+contract MasterChef is Ownable, ReentrancyGuard {
     using SafeMath for uint256;
     using SafeBEP20 for IBEP20;
 
