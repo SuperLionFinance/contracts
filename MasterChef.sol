@@ -44,6 +44,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         uint256 allocPoint;       // How many allocation points assigned to this pool. SLIONs to distribute per block.
         uint256 lastRewardBlock;  // Last block number that SLIONs distribution occurs.
         uint256 accSlionPerShare; // Accumulated SLIONs per share, times 1e12. See below.
+        uint16 depositFeeBP; // Deposit fee in basis points
     }
 
     // The SLION TOKEN!
@@ -52,6 +53,8 @@ contract MasterChef is Ownable, ReentrancyGuard {
     address public devaddr;
     // SLION tokens created per block.
     uint256 public slionPerBlock;
+    // Deposit Fee address
+    address public feeAddress;
     // Bonus muliplier for early slion makers.
     uint256 public BONUS_MULTIPLIER = 1;
 
@@ -108,7 +111,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         slion = _slion;
         devaddr = _devaddr;
         feeAddress = _feeAddress;
-        slionPerBlock = _slionPerBlock;
+        slionPerBlock = INITIAL_EMISSION_RATE;
         startBlock = _startBlock;
 
         // staking pool
