@@ -85,10 +85,10 @@ contract MasterChef is Ownable, ReentrancyGuard {
     uint256 public constant INITIAL_EMISSION_RATE = 1 ether;
     // Minimum emission rate: 0.5 SLION per block.
     uint256 public constant MINIMUM_EMISSION_RATE = 500 finney;
-    // Reduce emission every 4800 blocks ~ 4 hours.
-    uint256 public constant EMISSION_REDUCTION_PERIOD_BLOCKS = 4800;
-    // Emission reduction rate per period in basis points: 1%.
-    uint256 public constant EMISSION_REDUCTION_RATE_PER_PERIOD = 100;
+    // Reduce emission every 14,400 blocks ~ 12 hours.
+    uint256 public constant EMISSION_REDUCTION_PERIOD_BLOCKS = 14400;
+    // Emission reduction rate per period in basis points: 3%.
+    uint256 public constant EMISSION_REDUCTION_RATE_PER_PERIOD = 300;
     // Last reduction period index
     uint256 public lastReductionPeriodIndex = 0;
 
@@ -156,7 +156,6 @@ contract MasterChef is Ownable, ReentrancyGuard {
             accSlionPerShare: 0,
             depositFeeBP: _depositFeeBP
         }));
-        updateStakingPool();
     }
 
     // Update the given pool's SLION allocation point. Can only be called by the owner.
@@ -170,20 +169,6 @@ contract MasterChef is Ownable, ReentrancyGuard {
         poolInfo[_pid].depositFeeBP = _depositFeeBP;
         if (prevAllocPoint != _allocPoint) {
             totalAllocPoint = totalAllocPoint.sub(prevAllocPoint).add(_allocPoint);
-            updateStakingPool();
-        }
-    }
-
-    function updateStakingPool() internal {
-        uint256 length = poolInfo.length;
-        uint256 points = 0;
-        for (uint256 pid = 1; pid < length; ++pid) {
-            points = points.add(poolInfo[pid].allocPoint);
-        }
-        if (points != 0) {
-            points = points.div(3);
-            totalAllocPoint = totalAllocPoint.sub(poolInfo[0].allocPoint).add(points);
-            poolInfo[0].allocPoint = points;
         }
     }
 
